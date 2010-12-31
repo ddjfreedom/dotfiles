@@ -20,3 +20,24 @@ end
 function wall
   python ~/Proxy/wallproxy/local/proxy.py >/dev/null ^&1 &
 end
+
+# change file modes recursively
+function rchmod
+  if [ $argv[1] = "-h" ]
+    echo change file modes recursively
+    echo usage: rchmod directory-mode file-mode
+  else
+    for file in *
+      if [ -d $file ]
+        cd $file
+        rchmod $argv
+        cd ..
+        chmod $argv[1] $file
+      else
+        if [ -f $file ]
+          chmod $argv[2] $file
+        end
+      end
+    end
+  end
+end
