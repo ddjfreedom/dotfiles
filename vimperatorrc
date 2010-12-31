@@ -1,0 +1,21 @@
+"2.3.1 (created: 2010/04/07 18:56:53)
+
+set runtimepath=/Users/ddj/.vimperator
+source! /Users/ddj/.vimperatorrc.local
+set visualbell
+set go-=T
+hi Bell display: none;
+let mapleader = ','
+map <Leader>at tabout:addons<CR>
+map <Leader>ao oabout:addons<CR>
+map <Leader>pt tpt.sjtu.edu.cn<CR>
+map <Leader>po opt.sjtu.edu.cn<CR>
+map <leader>rt thttps://www.google.com/reader<CR>
+map <leader>ro ohttps://www.google.com/reader<CR>
+map <leader>mt thttps://mail.google.com/<CR>
+map <leader>mo ohttps://mail.google.com/<CR>
+map <Leader>n t<CR>
+map <left> <ESC>gT
+map <right> <ESC>gt
+autocmd LocationChange .* js modes.passAllKeys = /(www\.google\.com\/reader|mail\.google\.com)/.test(buffer.URL)
+" vim: set ft=vimperator:

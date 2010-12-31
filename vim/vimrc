@@ -1,0 +1,95 @@
+call pathogen#runtime_append_all_bundles() 
+"call pathogen#helptags()
+" Configuration file for vim
+set modelines=0		" CVE-2007-2438
+
+" Normally we use vim-extensions. If you want true vi-compatibility
+" remove change the following statements
+set nocompatible	" Use Vim defaults instead of 100% vi compatibility
+"filetype off
+
+" Don't write backup file if vim is being called by "crontab -e"
+au BufWrite /private/tmp/crontab.* set nowritebackup
+" Don't write backup file if vim is being called by "chpass"
+au BufWrite /private/etc/pw.* set nowritebackup
+" Don't use Ex mode, use Q for formatting
+map Q gq
+if has('mouse')
+  set mouse=a
+endif
+if has('gui_running')
+    colorscheme vividchalk
+else
+    colorscheme macclassic 
+endif
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,cp932
+set incsearch
+set number
+set ruler
+set hlsearch
+set autoindent
+set smartindent
+"set nowrap
+"set showmatch
+set linebreak
+syntax on
+filetype plugin indent on
+set backspace=indent,eol,start
+set directory=~/.vimtmp/ "directory for swap files
+set fileformats=unix,dos,mac
+set showcmd
+set laststatus=2
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%l,%v]
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+set visualbell t_vb=
+set ignorecase
+"set wildmode=list:longest,full
+set scrolloff=5
+set hidden
+
+let filetype_m='objc'
+let mapleader = ','
+let g:yankring_history_dir = '~/.vimtmp'
+let g:CommandTMaxHeight=0
+"let delimitMate_expand_cr=1
+let delimitMate_autoclose=0
+"neocomplcache config
+let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_min_syntax_length=3
+let g:neocomplcache_enable_smart_case=1
+let g:neocomplcache_enable_camel_case_completion=1
+let g:neocomplcache_temporary_dir='~/.vimtmp'
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" Plugin key-mappings.
+inoremap <expr><C-g> neocomplcache#undo_completion()
+inoremap <expr><C-l> neocomplcache#complete_common_string()
+
+noremap <space> <C-f>
+noremap <S-space> <C-b>
+noremap \ ,
+map <left> :bprev<CR>
+map <right> :bnext<CR>
+nmap <Leader>v :edit $MYVIMRC<CR>
+nmap <Leader>m :ConqueTerm zsh<CR>
+"navigation in wrapped line
+nmap <D-j> gj
+nmap <D-k> gk
+nmap <D-0> g0
+nmap <D-4> g$
+nmap <D-6> g^
+vmap <D-j> gj
+vmap <D-k> gk
+vmap <D-0> g0
+vmap <D-4> g$
+vmap <D-6> g^
+if has("autocmd")
+    "autocmd BufWritepost .vimrc source $MYVIMRC
+    autocmd FileType make setlocal noexpandtab | softtabstop=8 | shiftwidth=8
+endif
