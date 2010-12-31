@@ -1,5 +1,5 @@
 # Modify PATH
-set -l newpathelement /opt/local/bin /usr/local/git/bin /usr/local/bin
+set -l newpathelement /opt/local/bin /opt/local/sbin /usr/local/git/bin /usr/local/bin
 set -l index 0
 # remove every element of newpathelement in PATH
 for i in $PATH
