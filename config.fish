@@ -13,6 +13,8 @@ for i in $PATH
 end
 set -x PATH $newpathelement $PATH
 
+set -x GIT_EDITOR vim
+
 function gap
   python ~/Proxy/gappproxy/localproxy-2.0.0/proxy.py >/dev/null ^&1 &
 end
