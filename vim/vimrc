@@ -2,7 +2,6 @@ call pathogen#runtime_append_all_bundles()
 "call pathogen#helptags()
 " Configuration file for vim
 set modelines=0		" CVE-2007-2438
-
 " Normally we use vim-extensions. If you want true vi-compatibility
 " remove change the following statements
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
@@ -22,6 +21,8 @@ if has('gui_running')
 else
     colorscheme macclassic 
 endif
+
+set shell=/bin/bash
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,cp932
 set incsearch
 set number
@@ -70,6 +71,12 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " Plugin key-mappings.
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
+"haskell mode
+au BufEnter *.hs compiler ghc  
+let g:ghc="/usr/bin/ghc"
+let g:haddock_browser="open"
+let g:haddock_browser_callformat="%s %s"
+let g:haddock_docdir="/usr/share/doc/ghc/html/"
 
 noremap <space> <C-f>
 noremap <S-space> <C-b>
@@ -90,6 +97,6 @@ vmap <D-0> g0
 vmap <D-4> g$
 vmap <D-6> g^
 if has("autocmd")
-    "autocmd BufWritepost .vimrc source $MYVIMRC
-    autocmd FileType make setlocal noexpandtab | softtabstop=8 | shiftwidth=8
+  "autocmd BufWritepost .vimrc source $MYVIMRC
+  autocmd FileType make setlocal noexpandtab | softtabstop=8 | shiftwidth=8
 endif
