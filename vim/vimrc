@@ -98,5 +98,11 @@ vmap <D-4> g$
 vmap <D-6> g^
 if has("autocmd")
   "autocmd BufWritepost .vimrc source $MYVIMRC
-  autocmd FileType make setlocal noexpandtab | softtabstop=8 | shiftwidth=8
+  autocmd FileType make call SetMakeOption()
 endif
+function SetMakeOption()
+  setlocal noexpandtab
+  setlocal softtabstop=8
+  setlocal shiftwidth=8
+  setlocal tabstop=8
+endfunction
