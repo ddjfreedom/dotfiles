@@ -38,6 +38,8 @@
 (auto-indent-global-mode)
 (add-to-list 'auto-indent-disabled-modes-list 'slime-repl-mode)
 (add-to-list 'auto-indent-disabled-modes-list 'w3m-mode)
+(add-to-list 'auto-indent-disabled-modes-list 'haskell-mode)
+(add-to-list 'auto-indent-disabled-modes-list 'haskell-cabal-mode)
 ;;;YASnippet
 (add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c/")
 (require 'yasnippet)
@@ -45,7 +47,7 @@
 (yas/load-directory "~/.emacs.d/yasnippet-0.6.1c/snippets/")
 
 ;;;show line number
-;;(require 'linum+)
+(require 'linum+)
 (global-linum-mode t)
 
 (defun go-to-char (n char)
@@ -132,3 +134,8 @@ occurence of CHAR."
 (require 'w3m-load)
 (setq browse-url-browser-function 'w3m-browse-url)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+
+;;;haskell-mode
+(load "~/.emacs.d/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
