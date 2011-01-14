@@ -1,9 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/w3m")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/w3m")
 
-(add-to-list 'Info-default-directory-list "/opt/local/share/info")
+(add-to-list 'Info-default-directory-list "/usr/local/share/info/")
 
-(add-to-list 'exec-path "/opt/local/bin")
 (setq default-frame-alist 
       (append default-frame-alist
               '((height . 40)
@@ -19,9 +18,8 @@
 (set-default-font
  "-apple-Menlo-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
 
-(setenv "PATH"
-        (concat "/opt/local/bin:/opt/local/sbin:/usr/local/bin:"
-                (getenv "PATH")))
+(setq exec-path (append '("/usr/local/bin") exec-path))
+
 ;;;colortheme
 (add-to-list 'load-path "~/.emacs.d/colortheme/")
 (require 'color-theme)
@@ -110,7 +108,7 @@ occurence of CHAR."
 ;;;slime config
 (defvar common-lisp-hyperspec-root "file:///Users/ddj/Documents/Documentations/HyperSpec-7-0/HyperSpec/")
 (add-to-list 'load-path "~/.emacs.d/slime/")  ; your SLIME directory
-(setq inferior-lisp-program "/opt/local/bin/sbcl") ; your Lisp system
+(setq inferior-lisp-program "/usr/local/bin/sbcl") ; your Lisp system
 (require 'slime-autoloads)
 (slime-setup '(slime-fancy))
 

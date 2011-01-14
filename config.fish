@@ -1,18 +1,6 @@
 # Modify PATH
-set -l newpathelement /usr/local/bin
-set -l index 0
-# remove every element of newpathelement in PATH
-for i in $PATH
-  set index (math $index + 1)
-  for p in $newpathelement
-    if test $i = $p
-      set -e PATH[$index]
-      set index (math $index - 1)
-    end
-  end
-end
-set -x PATH $newpathelement $PATH
-
+set -e PATH[7]
+set PATH /usr/local/bin/ $PATH /usr/texbin/
 set -x GIT_EDITOR vim
 
 function gap

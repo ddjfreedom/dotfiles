@@ -5,10 +5,10 @@
 # MacPorts Installer addition on 2010-07-09_at_13:11:12: adding an appropriate PATH variable for use with MacPorts.
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
-
-if [ -f /opt/local/etc/bash_completion ]; then
-      . /opt/local/etc/bash_completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
 fi
+
 set -o vi
 export CLICOLOR="true"
 export LSCOLORS="exfxcxdxbxegedabagacad"
