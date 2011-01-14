@@ -77,7 +77,9 @@ let g:ghc="/usr/bin/ghc"
 let g:haddock_browser="open"
 let g:haddock_browser_callformat="%s %s"
 let g:haddock_docdir="/usr/share/doc/ghc/html/"
-
+"haskell indent
+let g:haskell_indent_if=2
+let g:haskell_indent_case=2
 noremap <space> <C-f>
 noremap <S-space> <C-b>
 noremap \ ,
