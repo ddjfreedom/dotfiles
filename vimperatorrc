@@ -17,5 +17,7 @@ map <leader>mo ohttps://mail.google.com/<CR>
 map <Leader>n t<CR>
 map <left> <ESC>gT
 map <right> <ESC>gt
+map = zI
+map -- - zO
 autocmd LocationChange .* js modes.passAllKeys = /(www\.google\.com\/reader|mail\.google\.com)/.test(buffer.URL)
 " vim: set ft=vimperator:
