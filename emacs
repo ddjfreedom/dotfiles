@@ -137,3 +137,9 @@ occurence of CHAR."
 (load "~/.emacs.d/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
+;;;tramp
+(require 'tramp)
+(setq tramp-initial-end-of-output "# ")
+(setq tramp-default-method "ssh")
+(setq tramp-verbose 10)
