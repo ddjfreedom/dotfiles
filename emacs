@@ -212,3 +212,7 @@ occurence of CHAR."
 (desktop-load-default)
 (desktop-read)
 (desktop-save-mode t)
+
+;;;magit
+(add-to-list 'load-path "/usr/local/Cellar/magit/0.8.2/share/emacs/site-lisp/")
+(require 'magit)
