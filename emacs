@@ -6,9 +6,9 @@
 (setq default-frame-alist 
       (append default-frame-alist
               '((height . 40)
-                (width . 100)
+                (width . 120)
                 (top . 45)
-                (left . 250))))
+                (left . 160))))
 (setq-default tab-width 2)
 (setq c-basic-offset 2
       c-default-style "k&r")
@@ -27,8 +27,33 @@
 (load-file "~/.emacs.d/colortheme/color-theme-vivid-chalk.el")
 (color-theme-vivid-chalk)
 
+;;; Don't show the startup screen
+(setq inhibit-startup-message t)
+
+;;; "y or n" instead of "yes or no"
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(setq visible-bell t)
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
+
 (require 'ido)
 (ido-mode t)
+(ido-everywhere t)
+(setq ido-enable-flex-matching t)
+
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;;Auto Indentation
 (setq auto-indent-key-for-end-of-line-then-newline "<M-return>")
@@ -47,6 +72,7 @@
 ;;;show line number
 (require 'linum+)
 (global-linum-mode t)
+(column-number-mode t)
 
 (defun go-to-char (n char)
   "Move forward to Nth occurence of CHAR.
@@ -61,9 +87,36 @@ occurence of CHAR."
 
 (define-key global-map (kbd "C-c a") 'go-to-char)
 
+;;;cedet
+(load-file "~/.emacs.d/cedet/common/cedet.el")
+(global-ede-mode t)
+(semantic-load-enable-excessive-code-helpers)
+(semantic-load-enable-primary-exuberent-ctags-support)
+(semanticdb-enable-exuberent-ctags 'c-mode)
+(semanticdb-enable-exuberent-ctags 'c++-mode)
+;;(speedbar t)
+;;(require 'semantic-ia)
+(require 'semantic-gcc)
+(add-hook 'texinfo-mode-hook (lambda () (require 'sb-texinfo)))
+
+;;;jdee
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/jdee/lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elib"))
+(require 'jde)
+
+;;;ecb
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb"))
+(require 'ecb)
+(setq ecb-auto-activate t)
+(setq ecb-tip-of-the-day nil)
+
 ;;;auto-complete
 (add-to-list 'load-path "~/.emacs.d/autocomplete/")
 (require 'auto-complete-config)
+(setq ac-use-menu-map t)
+(define-key ac-menu-map "\C-n" 'ac-next)
+(define-key ac-menu-map "\C-p" 'ac-previous)
+
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/autocomplete//ac-dict")
 (require 'auto-complete-clang)
 
@@ -115,15 +168,6 @@ occurence of CHAR."
 ;;;ibuffer
 (require 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
 
 (require 'highlight-80+)
 (require 'highlight-parentheses)
@@ -143,3 +187,28 @@ occurence of CHAR."
 (setq tramp-initial-end-of-output "# ")
 (setq tramp-default-method "ssh")
 (setq tramp-verbose 10)
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40")
+ '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+ '(ecb-source-path (quote (("/Users/ddj" "~"))))
+ '(session-use-package t nil (session)))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+
+;;;session
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
+;;;desktop
+(load "desktop")
+(desktop-load-default)
+(desktop-read)
+(desktop-save-mode t)
