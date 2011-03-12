@@ -208,10 +208,10 @@ occurence of CHAR."
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
 ;;;desktop
-(load "desktop")
-(desktop-load-default)
-(desktop-read)
-(desktop-save-mode t)
+;; (load "desktop")
+;; (desktop-load-default)
+;; (desktop-read)
+;; (desktop-save-mode t)
 
 ;;;magit
 (add-to-list 'load-path "/usr/local/Cellar/magit/0.8.2/share/emacs/site-lisp/")
