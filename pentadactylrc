@@ -1,5 +1,3 @@
-"hg4830 (created: 2010/11/15 01:00:11)
-
 set runtimepath=/Users/ddj/.pentadactyl
 set novisualbell
 set noerrorbells
@@ -7,13 +5,7 @@ set noerrorbells
 set mapleader=,
 map <right> gt
 map <left> gT
-
-map <Leader>at tabout:addons<CR>
-map <Leader>ao oabout:addons<CR>
-map <Leader>gr thttps://www.google.com/reader<CR>
-map <Leader>gm thttps://mail.google.com<CR>
-map <Leader>pt thttp://pt.sjtu.edu.cn<CR>
-map <Leader>xn thttp://www.renren.com<CR>
-
-autocmd LocationChange (www\.google\.com\/reader|mail\.google\.com) -js modes.set(modes.PASS_THROUGH)
+map = zI
+map -- - zO
+map <Leader>1 tgm<CR>
 " vim: set ft=pentadactyl:
