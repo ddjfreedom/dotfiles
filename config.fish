@@ -1,9 +1,15 @@
 # Modify PATH
 if [ (uname -s) = "Darwin" ]
   set -e PATH[7]
-  set PATH /usr/local/bin/ $PATH /usr/texbin/
+  set PATH /usr/local/bin/ /usr/local/sbin/ $PATH /usr/texbin/
   set -x GIT_EDITOR vim
   
+  set -x PAGER vimpager
+
+  function less
+    vimpager $argv
+  end
+
   function gap
     python ~/Proxy/gappproxy/localproxy-2.0.0/proxy.py >/dev/null ^&1 &
   end
