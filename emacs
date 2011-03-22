@@ -1,14 +1,14 @@
 (add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/w3m")
+;;(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/w3m")
 
 (add-to-list 'Info-default-directory-list "/usr/local/share/info/")
 
 (setq default-frame-alist 
       (append default-frame-alist
-              '((height . 40)
-                (width . 120)
-                (top . 45)
-                (left . 160))))
+              '((height . 43)
+                (width . 155)
+                (top . 22)
+                (left . 0))))
 (setq-default tab-width 2)
 (setq c-basic-offset 2
       c-default-style "k&r")
@@ -94,11 +94,17 @@ occurence of CHAR."
 (semantic-load-enable-primary-exuberent-ctags-support)
 (semanticdb-enable-exuberent-ctags 'c-mode)
 (semanticdb-enable-exuberent-ctags 'c++-mode)
+(require 'semanticdb-global)
+(semanticdb-enable-gnu-global-databases 'c-mode)
+(semanticdb-enable-gnu-global-databases 'c++-mode)
 ;;(speedbar t)
-;;(require 'semantic-ia)
+(require 'semantic-ia)
 (require 'semantic-gcc)
 (add-hook 'texinfo-mode-hook (lambda () (require 'sb-texinfo)))
-
+(ede-cpp-root-project "minix"
+                      :name "minix"
+                      :file "~/Developer/minix src/LICENSE"
+                      )
 ;;;jdee
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/jdee/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elib"))
@@ -109,7 +115,9 @@ occurence of CHAR."
 (require 'ecb)
 (setq ecb-auto-activate t)
 (setq ecb-tip-of-the-day nil)
-
+(global-set-key (kbd "<M-left>") 'ecb-goto-window-directories)
+(global-set-key (kbd "<M-right>") 'ecb-goto-window-edit1)
+(global-set-key (kbd "<M-down>") 'other-window)
 ;;;auto-complete
 (add-to-list 'load-path "~/.emacs.d/autocomplete/")
 (require 'auto-complete-config)
@@ -173,9 +181,9 @@ occurence of CHAR."
 (require 'highlight-parentheses)
 
 ;;;w3m
-(require 'w3m-load)
-(setq browse-url-browser-function 'w3m-browse-url)
-(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+;;(require 'w3m-load)
+;;(setq browse-url-browser-function 'w3m-browse-url)
+;;(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 
 ;;;haskell-mode
 (load "~/.emacs.d/haskell-mode/haskell-site-file")
@@ -193,6 +201,7 @@ occurence of CHAR."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(ecb-layout-window-sizes (quote (("left8" (0.23225806451612904 . 0.32558139534883723) (0.23225806451612904 . 0.20930232558139536) (0.23225806451612904 . 0.27906976744186046) (0.23225806451612904 . 0.16279069767441862)))))
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
  '(ecb-source-path (quote (("/Users/ddj" "~"))))
