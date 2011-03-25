@@ -2,6 +2,8 @@
 if [ (uname -s) = "Darwin" ]
   set -e PATH[7]
   set PATH /usr/local/bin/ /usr/local/sbin/ $PATH /usr/texbin/
+  set -e PATH[8]
+  set PATH ~/.gem/ruby/1.8/bin/ $PATH
   set -x GIT_EDITOR vim
   
   set -x PAGER vimpager
