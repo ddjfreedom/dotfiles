@@ -1,6 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/")
 ;;(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/w3m")
-
 (add-to-list 'Info-default-directory-list "/usr/local/share/info/")
 
 (setq default-frame-alist 
@@ -27,23 +26,23 @@
 (load-file "~/.emacs.d/colortheme/color-theme-vivid-chalk.el")
 (color-theme-vivid-chalk)
 
+;;;key bindings
+(define-key global-map (kbd "s-t") 'find-file) ;; cmd-t
+(define-key global-map (kbd "s-.") 'set-mark-command)
+(define-key global-map (kbd "s-b") 'ido-switch-buffer)
 ;;; Don't show the startup screen
 (setq inhibit-startup-message t)
 
+(tool-bar-mode -1)
 ;;; "y or n" instead of "yes or no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq visible-bell t)
 
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+(require 'package)
+(add-to-list 'package-archives
+            '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(package-initialize)
 
 (require 'ido)
 (ido-mode t)
@@ -57,12 +56,9 @@
 
 ;;;Auto Indentation
 (setq auto-indent-key-for-end-of-line-then-newline "<M-return>")
-(require 'auto-indent-mode)
-(auto-indent-global-mode)
-(add-to-list 'auto-indent-disabled-modes-list 'slime-repl-mode)
-(add-to-list 'auto-indent-disabled-modes-list 'w3m-mode)
-(add-to-list 'auto-indent-disabled-modes-list 'haskell-mode)
-(add-to-list 'auto-indent-disabled-modes-list 'haskell-cabal-mode)
+;;(require 'auto-indent-mode)
+;;(auto-indent-global-mode)
+
 ;;;YASnippet
 (add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c/")
 (require 'yasnippet)
@@ -87,13 +83,20 @@ occurence of CHAR."
 
 (define-key global-map (kbd "C-c a") 'go-to-char)
 
+;;gnu global
+(add-to-list 'load-path "/usr/local/Cellar/global/5.8.1/share/gtags/")
+(autoload 'gtags-mode "gtags" "" t)
+(gtags-mode t)
+;;(add-hook 'c-mode-hook '(lambda () (gtags-mode 1)))
+(define-key global-map (kbd "C-.") 'gtags-find-rtag)
 ;;;cedet
 (load-file "~/.emacs.d/cedet/common/cedet.el")
 (global-ede-mode t)
 (semantic-load-enable-excessive-code-helpers)
-(semantic-load-enable-primary-exuberent-ctags-support)
-(semanticdb-enable-exuberent-ctags 'c-mode)
-(semanticdb-enable-exuberent-ctags 'c++-mode)
+;; (semantic-load-enable-primary-exuberent-ctags-support)
+;; (semanticdb-enable-exuberent-ctags 'c-mode)
+;; (semanticdb-enable-exuberent-ctags 'c++-mode)
+;;(setq semantic-symref-tool 'global)
 (require 'semanticdb-global)
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
@@ -104,28 +107,30 @@ occurence of CHAR."
 (ede-cpp-root-project "minix"
                       :name "minix"
                       :file "~/Developer/minix src/LICENSE"
+                      :include-path '("/include" "/kernel/arch/i386/include" "/drivers/acpi/include")
                       )
 ;;;jdee
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/jdee/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/elib"))
-(require 'jde)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/jdee/lisp"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/elib"))
+;; (require 'jde)
 
 ;;;ecb
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb"))
-(require 'ecb)
-(setq ecb-auto-activate t)
-(setq ecb-tip-of-the-day nil)
-(global-set-key (kbd "<M-left>") 'ecb-goto-window-directories)
-(global-set-key (kbd "<M-right>") 'ecb-goto-window-edit1)
-(global-set-key (kbd "<M-down>") 'other-window)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb"))
+;; (require 'ecb)
+;;(setq ecb-auto-activate t)
+;;(setq ecb-tip-of-the-day nil)
+;; (global-set-key (kbd "<M-left>") 'ecb-goto-window-directories)
+;; (global-set-key (kbd "<M-right>") 'ecb-goto-window-edit1)
+;; (global-set-key (kbd "<M-down>") 'other-window)
+
 ;;;auto-complete
-(add-to-list 'load-path "~/.emacs.d/autocomplete/")
+;;(add-to-list 'load-path "~/.emacs.d/autocomplete/")
 (require 'auto-complete-config)
 (setq ac-use-menu-map t)
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
 
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/autocomplete//ac-dict")
+;;(add-to-list 'ac-dictionary-directories "~/.emacs.d/autocomplete//ac-dict")
 (require 'auto-complete-clang)
 
 (require 'ac-slime)
@@ -170,15 +175,13 @@ occurence of CHAR."
 (defvar common-lisp-hyperspec-root "file:///Users/ddj/Documents/Documentations/HyperSpec-7-0/HyperSpec/")
 (add-to-list 'load-path "~/.emacs.d/slime/")  ; your SLIME directory
 (setq inferior-lisp-program "/usr/local/bin/sbcl") ; your Lisp system
-(require 'slime-autoloads)
+(add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+(require 'slime)
 (slime-setup '(slime-fancy))
 
 ;;;ibuffer
 (require 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-(require 'highlight-80+)
-(require 'highlight-parentheses)
 
 ;;;w3m
 ;;(require 'w3m-load)
@@ -196,23 +199,6 @@ occurence of CHAR."
 (setq tramp-default-method "ssh")
 (setq tramp-verbose 10)
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-layout-window-sizes (quote (("left8" (0.23225806451612904 . 0.32558139534883723) (0.23225806451612904 . 0.20930232558139536) (0.23225806451612904 . 0.27906976744186046) (0.23225806451612904 . 0.16279069767441862)))))
- '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
- '(ecb-source-path (quote (("/Users/ddj" "~"))))
- '(session-use-package t nil (session)))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-
 ;;;session
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
@@ -225,3 +211,7 @@ occurence of CHAR."
 ;;;magit
 (add-to-list 'load-path "/usr/local/Cellar/magit/0.8.2/share/emacs/site-lisp/")
 (require 'magit)
+
+;;;paredit
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode t)))
+
