@@ -3,9 +3,9 @@
   (interactive)
   (color-theme-install
    '(color-theme-vivid-chalk
-     ((background-color . "black")
+     ((background-color . "#1a1a1a")
       (background-mode . dark)
-      (border-color . "black")
+      (border-color . "#1a1a1a")
       (cursor-color . "white")
       (foreground-color . "white")
       (list-matching-lines-face . bold)
@@ -13,7 +13,7 @@
      (default ((t (nil))))
      (bold ((t (:bold t))))
      (bold-italic ((t (:italic t :bold t))))
-     (fringe ((t (:background "black"))))
+     (fringe ((t (:background "#1a1a1a"))))
      (font-lock-builtin-face ((t (:foreground "#aaccff"))))
      (font-lock-comment-face ((t (:italic t :foreground "#9933cc"))))
      (font-lock-comment-delimiter-face ((t (:foreground "#9933cc"))))
