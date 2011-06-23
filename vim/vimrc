@@ -19,7 +19,7 @@ endif
 if has('gui_running')
     colorscheme vividchalk
 else
-    colorscheme macclassic 
+    colorscheme default 
 endif
 
 set shell=/bin/bash
