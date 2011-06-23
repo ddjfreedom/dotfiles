@@ -3,21 +3,13 @@
 set runtimepath=/Users/ddj/.vimperator
 source! /Users/ddj/.vimperatorrc.local
 set visualbell
-set go-=T
+set gui=tabs,nonavigation,noaddons,nobookmarks,nomenu
 hi Bell display: none;
 let mapleader = ','
-map <Leader>at tabout:addons<CR>
-map <Leader>ao oabout:addons<CR>
-map <Leader>pt tpt.sjtu.edu.cn<CR>
-map <Leader>po opt.sjtu.edu.cn<CR>
-map <leader>rt thttps://www.google.com/reader<CR>
-map <leader>ro ohttps://www.google.com/reader<CR>
-map <leader>mt thttps://mail.google.com/<CR>
-map <leader>mo ohttps://mail.google.com/<CR>
 map <Leader>n t<CR>
-map <left> <ESC>gT
-map <right> <ESC>gt
+map <left> gT
+map <right> gt
 map = zI
 map -- - zO
-autocmd LocationChange .* js modes.passAllKeys = /(www\.google\.com\/reader|mail\.google\.com)/.test(buffer.URL)
+map <Leader>a :set invapptab<CR>
 " vim: set ft=vimperator:
