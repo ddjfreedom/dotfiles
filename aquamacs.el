@@ -30,6 +30,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; setup packages
 (require 'package)
 (add-to-list 'package-archives
@@ -115,6 +116,7 @@
 (if window-system
     (require 'w3m-load))
 
+
 ;; slime
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 ;;(setq slime-use-autodoc-mode nil)
@@ -133,7 +135,6 @@
           (lambda ()
             (slime-define-keys slime-repl-mode-map ("\t" 'auto-complete))
             (set-up-slime-ac)))
-
 (defun slime-java-describe (symbol-name)
   "Get details on Java class/instance at point."
   (interactive (list (slime-read-symbol-name "Java Class/instance: ")))
@@ -236,6 +237,7 @@
 (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))
 
 ;; ecb
+(setq stack-trace-on-error t)
 (require 'ecb)
 
 ;; tramp
@@ -248,7 +250,11 @@
 (icy-mode 1)
 
 (setq ftp-program "lftp")
-
+(setq shell-file-name "bash")
+(setenv "PATH"
+        (concat (expand-file-name "/usr/local/bin")
+                path-separator
+                (getenv "PATH")))
 ;; vimpulse
 (require 'vimpulse)
 (vimpulse-vmap ",c" 'comment-dwim)
@@ -267,6 +273,27 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(defun my-org-dict-replace ()
+  (interactive)
+  (backward-word)
+  (search-forward (current-word))
+  (replace-match (concat "[[dict://" (current-word) "][" (current-word) "]]")))
+(defun my-look-up-word ()
+  (interactive)
+  (shell-command (concat "open dict://" (current-word))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (flyspell-mode)
+            (yas/minor-mode-on)
+            (local-set-key `[(,osxkeys-command-key i)] 'my-org-dict-replace)
+            (local-set-key `[(,osxkeys-command-key r)]
+                           (lambda ()
+                             (interactive)
+                             (shell-command (concat "open dict://" (current-word)))))))
+(require 'org)
+(org-add-link-type "dict" 'org-dict-open)
+(defun org-dict-open (path)
+  (shell-command (concat "open dict:" path)))
 
 ;; magit
 (global-set-key (kbd "C-<f10>") 'magit-status)
