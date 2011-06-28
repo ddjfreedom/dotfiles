@@ -291,6 +291,7 @@
                              (interactive)
                              (shell-command (concat "open dict://" (current-word)))))))
 (require 'org)
+(setq org-startup-indented t)
 (org-add-link-type "dict" 'org-dict-open)
 (defun org-dict-open (path)
   (shell-command (concat "open dict:" path)))
