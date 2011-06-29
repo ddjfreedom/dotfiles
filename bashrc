@@ -31,6 +31,16 @@ alias gap="python ~/Proxy/gappproxy/localproxy-2.0.0/proxy.py &> /dev/null &"
 alias wall="python ~/Proxy/wallproxy/local/proxy.py &> /dev/null &"
 alias go="python ~/Proxy/goagent/local/proxy.py &> /dev/null &"
 alias psg="ps aux | grep"
+alias emacs="/Applications/Aquamacs.app/Contents/MacOS/Aquamacs -nw"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gd="git diff"
+alias gl="git log"
+alias gsh="git show"
+alias gb="git branch"
+alias gch="git checkout"
 
 vmtrans () {
   port=$1
