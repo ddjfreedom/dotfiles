@@ -10,7 +10,7 @@ shopt -s cmdhist
 shopt -s no_empty_cmd_completion
 
 export COPYFILE_DISABLE=yes
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH
+#export PATH=/usr/local/bin:/usr/local/sbin:/usr/texbin:/usr/local/mysql/bin:$PATH
 export PS1="\u@\h \w> "
 export PAGER=vimpager
 export EDITOR=/usr/local/bin/vim
@@ -31,7 +31,7 @@ alias gap="python ~/Proxy/gappproxy/localproxy-2.0.0/proxy.py &> /dev/null &"
 alias wall="python ~/Proxy/wallproxy/local/proxy.py &> /dev/null &"
 alias go="python ~/Proxy/goagent/local/proxy.py &> /dev/null &"
 alias psg="ps aux | grep"
-alias emacs="/Applications/Aquamacs.app/Contents/MacOS/Aquamacs -nw"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit"
