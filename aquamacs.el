@@ -3,17 +3,17 @@
 ;; you start Aquamacs Emacs. If errors occur, Aquamacs will stop
 ;; evaluating this file and print errors in the *Messags* buffer.
 ;; Use this file in place of ~/.emacs (which is loaded as well.)
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/color-themes/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/swank-clojure-extra/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/cedet-1.0/common/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/ecb/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/icicles/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/bookmark+/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/vimpulse/")
-(add-to-list 'load-path "~/.emacs.d/nav/")
+(add-to-list 'load-path "~/.aquamacs.d/")
+(add-to-list 'load-path "~/.aquamacs.d/color-themes/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/swank-clojure-extra/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/yasnippet-0.6.1c/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/cedet-1.0/common/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/ecb/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/icicles/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/bookmark+/")
+(add-to-list 'load-path "~/.aquamacs.d/site-lisp/vimpulse/")
+(add-to-list 'load-path "~/.aquamacs.d/nav/")
 
 ;; no toolbar
 (tool-bar-mode -1)
@@ -38,7 +38,7 @@
 (package-initialize)
 
 ;; color-theme
-(load-file "~/.emacs.d/color-themes/color-theme-vivid-chalk.el")
+(load-file "~/.aquamacs.d/color-themes/color-theme-vivid-chalk.el")
 ;;(color-theme-arjen)
 (color-theme-vivid-chalk)
 
@@ -72,12 +72,12 @@
 (require 'semantic-ia)
 (require 'semantic-gcc)
 (add-hook 'texinfo-mode-hook (lambda () (require 'sb-texinfo)))
-(load-file "~/.emacs.d/ede-projects.el")
+(load-file "~/.aquamacs.d/ede-projects.el")
 
 ;; yasnippets
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+(yas/load-directory "~/.aquamacs.d/site-lisp/yasnippet-0.6.1c/snippets")
 
 ;; auto-complete
 (require 'auto-complete-config)
@@ -266,7 +266,7 @@
               (delete-frame (cadr (frame-list))))))
 ;; undo-tree
 ;;(require 'undo-tree)
-(load-file "~/.emacs.d/site-lisp/graphviz-dot-mode.el")
+(load-file "~/.aquamacs.d/site-lisp/graphviz-dot-mode.el")
 
 ;; org-mode
 (global-set-key "\C-cl" 'org-store-link)
