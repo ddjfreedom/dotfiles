@@ -13,6 +13,11 @@
                         (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))))
         (:name magit
                :after (lambda () (global-set-key (kbd "C-x C-a") 'magit-status)))
+         (:name yasnippet
+               :features (yasnippet)
+               :after (lambda ()
+                        (yas/initialize)
+                        (yas/load-directory (expand-file-name "yasnippet/snippets" el-get-dir))))
         (:name cedet
                :features (cedet)
                :after (lambda ()
@@ -32,11 +37,6 @@
                                         (lambda ()
                                           (interactive)
                                           (slime-connect "127.0.0.1" 4005)))))
-        (:name yasnippet
-               :features (yasnippet)
-               :after (lambda ()
-                        (yas/initialize)
-                        (yas/load-directory (expand-file-name "yasnippet/snippets" el-get-dir))))
         (:name auto-complete
                :features (auto-complete-config)
                :after (lambda ()
@@ -47,14 +47,21 @@
                         (define-key ac-menu-map "\C-p" 'ac-previous)
                         (setq ac-auto-start nil)
                         (setq ac-quick-help-delay 0.5)
-                        (ac-set-trigger-key "TAB")
+                        (ac-set-trigger-key "<tab>")
                         (ac-config-default)))
         (:name emacs-w3m
                :after (lambda () (if window-system (require 'w3m-load))))
         (:name org-mode
                :features (org)
                :after (lambda ()
-                        (load-file (expand-file-name "org-mode.el" my-emacs-path))))))
+                        (load-file (expand-file-name "org-mode.el" my-emacs-path))))
+        (:name anything
+               :features (anything-startup))
+        (:name undo-tree
+               :features undo-tree
+               :after (lambda ()
+                        (global-undo-tree-mode)
+                        (global-set-key (kbd "s-Z") 'undo-tree-redo)))))
 (el-get)
 
 

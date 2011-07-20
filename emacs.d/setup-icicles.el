@@ -10,12 +10,12 @@
               )))
 
 ;; pp+
-;;(require 'pp+)
-;;(substitute-key-definition 'eval-last-sexp
-;;                           'pp-eval-last-sexp global-map)
-;;(substitute-key-definition 'eval-expression
-;;                           'pp-eval-expression global-map)
-;;
+(require 'pp+)
+(substitute-key-definition 'eval-last-sexp
+                          'pp-eval-last-sexp global-map)
+(substitute-key-definition 'eval-expression
+                          'pp-eval-expression global-map)
+
 (require 'icicles)
 (icy-mode 1)
 

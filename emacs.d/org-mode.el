@@ -23,3 +23,4 @@
 (org-add-link-type "dict" 'org-dict-open)
 (defun org-dict-open (path)
   (shell-command (concat "open dict:" path)))
+(setq org-directory "~/Documents/org/")
