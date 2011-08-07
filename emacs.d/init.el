@@ -5,6 +5,12 @@
 				   my-emacs-path
 				 path))))
 
+;; ido setup
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(ido-everywhere t)
+(ido-mode t)
+
 ;; gtags setup
 (add-to-list 'load-path "/usr/local/Cellar/global/5.9.4/share/gtags/")
 (autoload 'gtags-mode "gtags" "" t)
@@ -13,7 +19,7 @@
 
 (my-load-file "el-get-setup.el")
 (my-load-file "basic.el")
-(my-load-file "setup-icicles.el")
+;;(my-load-file "setup-icicles.el")
 (my-load-file "keybindings.el")
 ;; ecb
 (when (> emacs-major-version 23)

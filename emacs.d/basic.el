@@ -4,9 +4,16 @@
 (setq default-frame-alist
       (nconc default-frame-alist
 	     '((top . 22)
-	       (left . 0)
-	       (height . 49)
-	       (width . 180))))
+	       (left . 250)
+	       (height . 53)
+	       (width . 120))))
+
+;; font setting
+(set-face-attribute 'default nil :font "Menlo 12")
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font)
+                      charset
+                      (font-spec :family "WenQuanYi Micro Hei Mono" :size 14)))
 
 (setq-default tab-width 2)
 (setq c-basic-offset 2
@@ -19,12 +26,16 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq inhibit-startup-screen t)
-(setq initial-buffer-choice "~/Documents/org/TODOs.org")
+;;(setq initial-buffer-choice "~/Documents/org/TODOs.org")
 
 (tool-bar-mode -1)
 
+(add-to-list 'load-path (expand-file-name "site-lisp" my-emacs-path))
+(require 'linum+)
+(require 'linum-off)
+(setq linum-format ["%%%dd| "])
+(setq linum-delay t)
 (global-linum-mode t)
-(setq linum-format "%d ")
 
 (fringe-mode '(0 . 0))
 
@@ -40,3 +51,10 @@
         (unless (memq this-command
                       '(isearch-abort abort-recursive-edit exit-minibuffer keyboard-quit))
           (ding))))
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(autoload 'ibuffer "ibuffer" "List Buffers." t)
+
+(column-number-mode t)
+
