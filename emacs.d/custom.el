@@ -9,7 +9,8 @@
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ecb-split-edit-window-after-start nil)
- '(ecb-tip-of-the-day nil))
+ '(ecb-tip-of-the-day nil)
+ '(org-agenda-files (quote ("~/Documents/org/capture.org" "~/Documents/org/todo.org" "~/Documents/org/books.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
