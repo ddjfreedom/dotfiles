@@ -30,7 +30,8 @@
                         (add-hook 'texinfo-mode-hook (lambda () (require 'sb-texinfo)))
                         (global-semantic-idle-completions-mode -1)))
         (:name slime
-               :features (slime)
+               :features slime
+               :compile ()
                :after (lambda ()
                         (load-file (expand-file-name "slime.el" my-emacs-path))
                         (global-set-key (kbd "C-x C-8")
@@ -61,7 +62,14 @@
                :features undo-tree
                :after (lambda ()
                         (global-undo-tree-mode)
-                        (global-set-key (kbd "s-Z") 'undo-tree-redo)))))
+                        (global-set-key (kbd "s-Z") 'undo-tree-redo)))
+        (:name smex
+               :features smex
+               :after (lambda ()
+                        (smex-initialize)
+                        (global-set-key (kbd "M-x") 'smex)
+                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+                        (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)))))
 (el-get)
 
 
