@@ -16,6 +16,7 @@
          (:name yasnippet
                :features (yasnippet)
                :after (lambda ()
+                        (setq yas/trigger-key "")
                         (yas/initialize)
                         (yas/load-directory (expand-file-name "yasnippet/snippets" el-get-dir))))
         (:name cedet
@@ -48,7 +49,7 @@
                         (define-key ac-menu-map "\C-p" 'ac-previous)
                         (setq ac-auto-start nil)
                         (setq ac-quick-help-delay 0.5)
-                        (ac-set-trigger-key "<tab>")
+                        (ac-set-trigger-key "TAB")
                         (ac-config-default)))
         (:name emacs-w3m
                :after (lambda () (if window-system (require 'w3m-load))))

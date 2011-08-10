@@ -60,14 +60,17 @@
       '(("t" "todo" entry (file org-default-notes-file)
          "* TODO %?\n%U\n  %i")
         ("b" "book to read" entry (file (concat org-directory "/books.org"))
-         "* TOREAD %? %U\n  %i")
+         "* TOREAD %?\n%U\n  %i")
         ("n" "note" entry (file org-default-notes-file)
-         "* %? :NOTE:\n%U\n  %i")))
+         "* %? :NOTE:\n%U\n  %i")
+        ("j" "journal" entry (file org-default-notes-file)
+         "* %?\n" :clock-in t :clock-keep t)))
 
 ;; org refile setup
 ;; targets include current file and any files in org-agenda-files
 (setq org-refile-targets `((nil :maxlevel . 3)
-                           (org-agenda-files :maxlevel . 3)))
+                           (org-agenda-files :maxlevel . 3)
+                           (,(concat org-directory "/entertain.org") :maxlevel . 3)))
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
@@ -107,3 +110,6 @@
                 ((org-agenda-overriding-header "Books")))
           (tags "REFILE"
                 ((org-agenda-overriding-header "Tasks and Notes to Refile")))))))
+
+;; org contrib setup
+(require 'org-checklist)

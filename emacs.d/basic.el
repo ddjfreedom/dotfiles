@@ -11,9 +11,9 @@
 ;; font setting
 (set-face-attribute 'default nil :font "Menlo 12")
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-                      charset
-                      (font-spec :family "WenQuanYi Micro Hei Mono" :size 14)))
+  (set-fontset-font (frame-parameter nil 'font)
+                    charset
+                    (font-spec :family "WenQuanYi Micro Hei Mono" :size 14)))
 
 (setq-default tab-width 2)
 (setq c-basic-offset 2
