@@ -31,14 +31,14 @@
         (sequence "TOREAD(r)" "READING(R)" "|" "FINISHED(f!)")))
 
 (setq org-todo-keyword-faces
-      '(("TODO" :foreground "red" :weight bold)
+      `(("TODO" :foreground "orange red" :weight bold)
         ("NEXT" :foreground "cyan" :weight bold)
         ("STARTED" :foreground "cyan" :weight bold)
         ("DONE" :foreground "forest green" :weight bold)
         ("WAITING" :foreground "orange" :weight bold)
         ("SOMEDAY" :foreground "magenta" :weight bold)
         ("CANCELLED" :foreground "forest green" :weight bold)
-        ("TOREAD" :foreground "red" :weight bold)
+        ("TOREAD" :foreground "orange red" :weight bold)
         ("READING" :foreground "cyan" :weight bold)
         ("FINISHED" :foreground "forest green" :weight bold)))
 
@@ -70,7 +70,8 @@
 ;; targets include current file and any files in org-agenda-files
 (setq org-refile-targets `((nil :maxlevel . 3)
                            (org-agenda-files :maxlevel . 3)
-                           (,(concat org-directory "/entertain.org") :maxlevel . 3)))
+                           (,(concat org-directory "/entertain.org") :maxlevel . 2)
+                           (,(concat org-directory "/note.org") :maxlevel . 3)))
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)

@@ -41,9 +41,6 @@
 
 (show-paren-mode t)
 
-(load-file (expand-file-name "color-theme-vivid-chalk.el" my-emacs-path))
-(color-theme-vivid-chalk)
-
 (setq-default major-mode 'org-mode)
 
 (setq ring-bell-function

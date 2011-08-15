@@ -4,6 +4,12 @@
 			       (if (null path)
 				   my-emacs-path
 				 path))))
+(defun ddj/set-key-bindings (action &rest args)
+  (mapcar (lambda (lst)
+            (let ((key (car lst))
+                  (val (cadr lst)))
+              (funcall action key val)))
+          args))
 
 ;; ido setup
 (require 'ido)

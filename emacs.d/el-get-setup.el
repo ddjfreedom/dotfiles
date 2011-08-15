@@ -5,6 +5,11 @@
       '(;; (:name color-theme-almost-monokai
         ;;        :features (color-theme-almost-monokai)
         ;;        :after (lambda () (color-theme-almost-monokai)))
+        (:name color-theme-zenburn
+               :type git
+               :url "https://github.com/bbatsov/zenburn-emacs.git"
+               :features color-theme-zenburn
+               :after (lambda () (color-theme-zenburn)))
         (:name clojure-mode)
         (:name paredit
                :after (lambda ()
@@ -13,7 +18,7 @@
                         (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))))
         (:name magit
                :after (lambda () (global-set-key (kbd "C-x C-a") 'magit-status)))
-         (:name yasnippet
+        (:name yasnippet
                :features (yasnippet)
                :after (lambda ()
                         (setq yas/trigger-key "")
@@ -56,7 +61,8 @@
         (:name org-mode
                :features (org)
                :after (lambda ()
-                        (load-file (expand-file-name "org-mode.el" my-emacs-path))))
+                        (eval-after-load "org"
+			  (load-file (expand-file-name "org-mode.el" my-emacs-path)))))
         (:name anything
                :features (anything-startup))
         (:name undo-tree
@@ -68,10 +74,19 @@
                :features smex
                :after (lambda ()
                         (smex-initialize)
-                        (global-set-key (kbd "M-x") 'smex)
-                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-                        (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)))))
-(el-get)
+                        (ddj/set-key-bindings 'global-set-key
+                                              `(,(kbd "M-x") smex)
+                                              `(,(kbd "M-X") smex-major-mode-commands))))
+        (:name lacarte
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/lacarte.el"
+               :features lacarte
+               :after (lambda ()
+                        (ddj/set-key-bindings 'global-set-key
+                                              `(,(kbd "<escape> M-x") lacarte-execute-command)
+                                              `(,(kbd "M-`") lacarte-execute-menu-command)
+                                              `(,(kbd "<f10>") lacarte-execute-menu-command))))))
+(el-get 'sync)
 
 
 
