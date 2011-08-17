@@ -28,5 +28,28 @@
         ad-do-it))))
 (add-hook 'dired-mode-hook
           '(lambda () (setq ido-enable-replace-completing-read nil)))
+(add-hook 'c-mode-common-hook
+          '(lambda () (setq ido-enable-replace-completing-read nil)))
+;; This command is AMAZING. I recommend mapping it to `C-x v' or `C-x w'
+;; depending on which is easier on your keyboard.
+(defun ido-jump-to-window ()
+  (interactive)
+  (let* (;; Swaps the current buffer name with the next one along.
+         (visible-buffers ((lambda (l)
+                             (if (cdr l)
+                                 (cons (cadr l) (cons (car l) (cddr l)))
+                               l))
+                           (mapcar '(lambda (window) (buffer-name (window-buffer window))) (window-list))))
+         (buffer-name (ido-completing-read "Window: " visible-buffers))
+         window-of-buffer)
+    (if (not (member buffer-name visible-buffers))
+        (error "'%s' does not have a visible window" buffer-name)
+      (setq window-of-buffer
+                (delq nil (mapcar '(lambda (window)
+                                       (if (equal buffer-name (buffer-name (window-buffer window)))
+                                           window
+                                         nil))
+                                  (window-list))))
+      (select-window (car window-of-buffer)))))
 (ido-everywhere t)
 (ido-mode t)
