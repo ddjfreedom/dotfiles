@@ -24,6 +24,7 @@
                '(lambda ()
                   (setq TeX-command-default "XeLaTeX")
                   (outline-minor-mode 1))
+               'predictive-mode
                'visual-line-mode
                'LaTeX-math-mode
                'turn-on-reftex

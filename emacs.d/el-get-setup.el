@@ -83,12 +83,11 @@
                :description "An add-on which defines three ac-sources for the auto-complete package"
                :type http
                :url "https://ac-math.googlecode.com/svn/trunk/ac-math.el"
-               :features ac-math)))
+               :features ac-math)
+        (:name predictive
+               :build `(,(concat "make EMACS=" el-get-emacs)
+                        "gzip -df predictive-user-manual.info.gz")
+               :info "./predictive-user-manual.info"
+               :load-path ("." "./latex/"))))
 (el-get 'sync)
-
-
-
-
-
-
 
