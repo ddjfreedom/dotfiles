@@ -2,10 +2,7 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get/")
 (require 'el-get)
 (setq el-get-sources
-      '(;; (:name color-theme-almost-monokai
-        ;;        :features (color-theme-almost-monokai)
-        ;;        :after (lambda () (color-theme-almost-monokai)))
-        (:name color-theme-zenburn
+      '((:name color-theme-zenburn
                :type git
                :url "https://github.com/bbatsov/zenburn-emacs.git"
                :features color-theme-zenburn
@@ -45,17 +42,7 @@
                                           (interactive)
                                           (slime-connect "127.0.0.1" 4005)))))
         (:name auto-complete
-               :features (auto-complete-config)
-               :after (lambda ()
-                        (add-to-list 'ac-dictionary-directories
-                                     (expand-file-name "el-get/auto-complete/dict" my-emacs-path))
-                        (setq ac-use-menu-map t)
-                        (define-key ac-menu-map "\C-n" 'ac-next)
-                        (define-key ac-menu-map "\C-p" 'ac-previous)
-                        (setq ac-auto-start nil)
-                        (setq ac-quick-help-delay 0.5)
-                        (ac-set-trigger-key "TAB")
-                        (ac-config-default)))
+               :features (auto-complete-config))
         (:name emacs-w3m
                :after (lambda () (if window-system (require 'w3m-load))))
         (:name org-mode
@@ -85,7 +72,18 @@
                         (ddj/set-key-bindings 'global-set-key
                                               `(,(kbd "<escape> M-x") lacarte-execute-command)
                                               `(,(kbd "M-`") lacarte-execute-menu-command)
-                                              `(,(kbd "<f10>") lacarte-execute-menu-command))))))
+                                              `(,(kbd "<f10>") lacarte-execute-menu-command))))
+        (:name auctex
+               :build `("./autogen.sh"
+                        ,(concat "./configure --with-lispdir=`pwd` --with-emacs="
+                                 el-get-emacs
+                                 " --with-texmf-dir=/usr/local/texlive/texmf-local")
+                        "make"))
+        (:name ac-math
+               :description "An add-on which defines three ac-sources for the auto-complete package"
+               :type http
+               :url "https://ac-math.googlecode.com/svn/trunk/ac-math.el"
+               :features ac-math)))
 (el-get 'sync)
 
 
