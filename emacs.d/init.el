@@ -10,23 +10,29 @@
                   (val (cadr lst)))
               (funcall action key val)))
           args))
+(defun ddj/add-hooks (hook &rest args)
+  (dolist (fn args)
+    (add-hook hook fn)))
 
-;; ido setup
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(ido-everywhere t)
-(ido-mode t)
-
+(my-load-file "ido-config.el")
 ;; gtags setup
 (add-to-list 'load-path "/usr/local/Cellar/global/5.9.4/share/gtags/")
 (autoload 'gtags-mode "gtags" "" t)
-(add-hook 'c-mode-hook '(lambda () (gtags-mode 1)))
-(define-key global-map (kbd "C-.") 'gtags-find-rtag)
+(add-hook 'c-mode-common-hook
+          '(lambda ()
+             (gtags-mode 1)
+             (define-key c-mode-base-map (kbd "C-.")
+               'gtags-find-rtag)))
 
 (my-load-file "el-get-setup.el")
 (my-load-file "basic.el")
-;;(my-load-file "setup-icicles.el")
 (my-load-file "keybindings.el")
+(my-load-file "auctex-config.el")
+(my-load-file "autocomplete-config.el")
+;; outline-minor-mode
+(add-hook 'outline-minor-mode-hook
+          (lambda () (local-set-key "\C-c\C-z"
+                                    outline-mode-prefix-map)))
 ;; ecb
 (when (> emacs-major-version 23)
   (setq stack-trace-on-error nil))
