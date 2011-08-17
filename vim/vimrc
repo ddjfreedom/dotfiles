@@ -17,7 +17,7 @@ if has('mouse')
   set mouse=a
 endif
 if has('gui_running')
-    colorscheme vividchalk
+    colorscheme zenburn
 else
     colorscheme default 
 endif
