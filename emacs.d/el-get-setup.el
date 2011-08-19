@@ -2,11 +2,13 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get/")
 (require 'el-get)
 (setq el-get-sources
-      '((:name color-theme-zenburn
+      '((:name color-theme-solarized
                :type git
-               :url "https://github.com/bbatsov/zenburn-emacs.git"
-               :features color-theme-zenburn
-               :after (lambda () (color-theme-zenburn)))
+               :url "https://github.com/sellout/emacs-color-theme-solarized.git"
+               :after (lambda ()
+                        (add-to-list 'custom-theme-load-path
+                                     (expand-file-name "color-theme-solarized" el-get-dir))
+                        (load-theme 'solarized-light t)))
         (:name clojure-mode)
         (:name paredit
                :after (lambda ()
@@ -31,16 +33,14 @@
                         (require 'semantic-ia)
                         (require 'semantic-gcc)
                         (add-hook 'texinfo-mode-hook (lambda () (require 'sb-texinfo)))
-                        (global-semantic-idle-completions-mode -1)))
+                        (global-semantic-idle-completions-mode -1)
+                        (global-semantic-stickyfunc-mode -1)
+                        (global-semantic-highlight-func-mode -1)))
         (:name slime
                :features slime
                :compile ()
                :after (lambda ()
-                        (load-file (expand-file-name "slime.el" my-emacs-path))
-                        (global-set-key (kbd "C-x C-8")
-                                        (lambda ()
-                                          (interactive)
-                                          (slime-connect "127.0.0.1" 4005)))))
+                        (load-file (expand-file-name "slime.el" my-emacs-path))))
         (:name auto-complete
                :features (auto-complete-config))
         (:name emacs-w3m
@@ -49,9 +49,7 @@
                :features (org)
                :after (lambda ()
                         (eval-after-load "org"
-			  (load-file (expand-file-name "org-mode.el" my-emacs-path)))))
-        (:name anything
-               :features (anything-startup))
+                          (load-file (expand-file-name "org-mode.el" my-emacs-path)))))
         (:name undo-tree
                :features undo-tree
                :after (lambda ()
@@ -62,8 +60,7 @@
                :after (lambda ()
                         (smex-initialize)
                         (ddj/set-key-bindings 'global-set-key
-                                              `(,(kbd "M-x") smex)
-                                              `(,(kbd "M-X") smex-major-mode-commands))))
+                                             )))
         (:name lacarte
                :type http
                :url "http://www.emacswiki.org/emacs/download/lacarte.el"
@@ -88,6 +85,10 @@
                :build `(,(concat "make EMACS=" el-get-emacs)
                         "gzip -df predictive-user-manual.info.gz")
                :info "./predictive-user-manual.info"
-               :load-path ("." "./latex/"))))
+               :load-path ("." "./latex/"))
+        (:name info+
+               :type http
+               :url "http://www.emacswiki.org/emacs/download/info+.el"
+               :after (lambda () (eval-after-load "info" '(require 'info+))))))
 (el-get 'sync)
 

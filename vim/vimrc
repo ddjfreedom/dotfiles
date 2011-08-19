@@ -16,12 +16,11 @@ map Q gq
 if has('mouse')
   set mouse=a
 endif
-if has('gui_running')
-    colorscheme zenburn
-else
-    colorscheme default 
-endif
 
+if has('gui_running')
+  set background=light
+endif
+colorscheme solarized
 set shell=/bin/bash
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,cp932
 set incsearch
