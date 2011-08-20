@@ -4,9 +4,9 @@
 (setq default-frame-alist
       (nconc default-frame-alist
 	     '((top . 22)
-	       (left . 250)
+	       (left . 0)
 	       (height . 53)
-	       (width . 120))))
+	       (width . 180))))
 
 ;; font setting
 (set-face-attribute 'default nil :font "Menlo 12")

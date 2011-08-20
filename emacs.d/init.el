@@ -23,7 +23,7 @@
 (my-load-file "autocomplete-config.el")
 ;; outline-minor-mode
 (add-hook 'outline-minor-mode-hook
-          (lambda () (local-set-key "\C-c\C-z"
+          (lambda () (local-set-key "\C-z\C-z"
                                     outline-mode-prefix-map)))
 ;; ecb
 (when (> emacs-major-version 23)
@@ -36,7 +36,9 @@
           '(lambda ()
              (gtags-mode 1)
              (define-key c-mode-base-map (kbd "C-.") 'gtags-find-rtag)
-             (define-key c-mode-base-map "\C-x\C-e" 'ecb-minor-mode)))
+             (define-key c-mode-base-map "\C-ze" 'ecb-minor-mode)))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+(set-register ?t '(file . "~/Documents/org/todo.org"))

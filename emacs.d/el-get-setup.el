@@ -27,15 +27,16 @@
                :features (cedet)
                :after (lambda ()
                         (semantic-load-enable-excessive-code-helpers)
-                        (require 'semanticdb-global)
-                        (semanticdb-enable-gnu-global-databases 'c-mode)
-                        (semanticdb-enable-gnu-global-databases 'c++-mode)
-                        (require 'semantic-ia)
+                        (eval-after-load "gtags"
+                          '(progn
+                             (require 'semanticdb-global)
+                             (semanticdb-enable-gnu-global-databases 'c-mode)
+                             (semanticdb-enable-gnu-global-databases 'c++-mode)))
                         (require 'semantic-gcc)
-                        (add-hook 'texinfo-mode-hook (lambda () (require 'sb-texinfo)))
                         (global-semantic-idle-completions-mode -1)
                         (global-semantic-stickyfunc-mode -1)
-                        (global-semantic-highlight-func-mode -1)))
+                        (global-semantic-highlight-func-mode -1)
+                        (kill-buffer "*Compile-Log*")))
         (:name slime
                :features slime
                :compile ()
@@ -89,6 +90,28 @@
         (:name info+
                :type http
                :url "http://www.emacswiki.org/emacs/download/info+.el"
-               :after (lambda () (eval-after-load "info" '(require 'info+))))))
+               :after (lambda () (eval-after-load "info" '(require 'info+))))
+        (:name sunrise-commander
+               :type git
+               :url "https://github.com/escherdragon/sunrise-commander.git"
+               :compile ()
+               :features (sunrise-commander
+                          sunrise-x-buttons
+                          sunrise-x-modeline
+                          sunrise-x-tree
+                          sunrise-x-loop))
+        (:name ack-and-a-half
+               :type git
+               :url "https://github.com/jhelwig/ack-and-a-half.git"
+               :after (lambda ()
+                        (autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
+                        (autoload 'ack-and-a-half "ack-and-a-half" nil t)
+                        (autoload 'ack-and-a-half-find-file-samee "ack-and-a-half" nil t)
+                        (autoload 'ack-and-a-half-find-file "ack-and-a-half" nil t)
+                        ;; Create shorter aliases
+                        (defalias 'ack 'ack-and-a-half)
+                        (defalias 'ack-same 'ack-and-a-half-same)
+                        (defalias 'ack-find-file 'ack-and-a-half-find-file)
+                        (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)))))
 (el-get 'sync)
 
