@@ -1,0 +1,12 @@
+$if Bash
+  Space: magic-space
+  "\eo": "\C-p\C-a\ef "
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  "\es": menu-complete
+$endif
+set blink-matching-paren on
+set completion-ignore-case on
+set visible-stats on
+set show-all-if-ambiguous on
+set match-hidden-files off

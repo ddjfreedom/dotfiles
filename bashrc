@@ -8,18 +8,22 @@ shopt -s autocd
 shopt -s dirspell
 shopt -s cmdhist
 shopt -s no_empty_cmd_completion
-
-export COPYFILE_DISABLE=yes
-#export PATH=/usr/local/bin:/usr/local/sbin:/usr/texbin:/usr/local/mysql/bin:$PATH
-export PS1="\u@\h \w> "
-export PAGER=vimpager
-export EDITOR=/usr/local/bin/vim
-export CLICOLOR="true"
-export LSCOLORS="exfxcxdxbxegedabagacad"
+shopt -s histappend
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
+
+export COPYFILE_DISABLE=yes
+export PAGER=vimpager
+export EDITOR=/usr/local/bin/vim
+export CLICOLOR="true"
+export LSCOLORS="exfxcxdxbxegedabagacad"
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+blue=$(tput setaf 4)
+reset=$(tput sgr0)
+PS1='[\u@\h \[$blue\]\w \[$red\]${?/#0/}\[$green\]$(__git_ps1 " (%s)")\[$reset\]]\$ '
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -32,15 +36,12 @@ alias wall="python ~/Proxy/wallproxy/local/proxy.py &> /dev/null &"
 alias go="python ~/Proxy/goagent/local/proxy.py &> /dev/null &"
 alias psg="ps aux | grep"
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit"
-alias gcm="git commit -m"
-alias gd="git diff"
-alias gl="git log"
-alias gsh="git show"
-alias gb="git branch"
-alias gch="git checkout"
+alias ec="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+alias grep="grep --color=auto"
+alias g="git"
+# auto completion for alias g
+complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
+ || complete -o default -o nospace -F _git g
 
 vmtrans () {
   port=$1
@@ -103,3 +104,7 @@ roll () {
 
 # disable XON/XOFF to restore C-s forward search
 stty -ixon
+
+# Local Variables:
+# mode: sh
+# End:
