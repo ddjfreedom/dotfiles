@@ -99,7 +99,10 @@
                           sunrise-x-buttons
                           sunrise-x-modeline
                           sunrise-x-tree
-                          sunrise-x-loop))
+                          sunrise-x-loop)
+               :after (lambda ()
+                        (setq sr-terminal-program "bash")
+                        (setq sr-listing-switches "-alh")))
         (:name ack-and-a-half
                :type git
                :url "https://github.com/jhelwig/ack-and-a-half.git"
@@ -112,6 +115,10 @@
                         (defalias 'ack 'ack-and-a-half)
                         (defalias 'ack-same 'ack-and-a-half-same)
                         (defalias 'ack-find-file 'ack-and-a-half-find-file)
-                        (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)))))
+                        (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)))
+        (:name unbound
+               :features unbound)
+        (:name sicp
+               :info "sicp.info")))
 (el-get 'sync)
 

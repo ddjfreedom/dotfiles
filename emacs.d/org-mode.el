@@ -10,9 +10,17 @@
 (defun my-look-up-word ()
   (interactive)
   (shell-command (concat "open dict://" (current-word))))
+(defun yas/org-very-safe-expand ()
+  (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+
 (add-hook 'org-mode-hook
           (lambda ()
             (yas/minor-mode-on)
+            (make-variable-buffer-local 'yas/trigger-key)
+            (org-set-local 'yas/trigger-key [tab])
+            (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+            (define-key yas/keymap [tab] 'yas/next-field)
+            (visual-line-mode t)
             (local-set-key (kbd "s-i") 'my-org-dict-replace)
             (local-set-key (kbd "s-r") 'my-look-up-word)))
 (add-hook 'org-mode-hook 'turn-on-flyspell 'append)
@@ -78,11 +86,14 @@
 (setq org-completion-use-ido t)
 
 ;; org tag setup
-(setq org-tag-alist
+(setq org-tag-persistent-alist
       '(("CANCELLED" . ?c)
         ("WAITING" . ?w)
         ("NOTE" . ?n)
-        ("PROJECT" . ?p)))
+        ("PROJECT" . ?p)
+        ("CLOJURE" . ?C)
+        ("EMACS" . ?E)
+        ("HOMEWORK" . ?h)))
 (setq org-agenda-tags-todo-honor-ignore-options t)
 
 ;; org archive setup
@@ -100,7 +111,7 @@
          ((org-agenda-overriding-header "Projects")))
         (" " "Agenda"
          ((agenda ""
-                  ((org-agenda-ndays 2)))
+                  ((org-agenda-ndays 1)))
           (tags "PROJECT/!"
                 ((org-agenda-overriding-header "Projects")))
           (tags-todo "-WAITING-CANCELLED-BOOK-PROJECT-REFILE/!"

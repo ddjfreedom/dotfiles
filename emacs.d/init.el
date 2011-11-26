@@ -41,4 +41,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
-(set-register ?t '(file . "~/Documents/org/todo.org"))
+(mapc (lambda (arg) (set-register (car arg) (cadr arg)))
+      '((?t (file . "~/Documents/org/todo.org"))
+        (?n (file . "~/Documents/org/note.org"))
+        (?c (file . "~/Documents/org/capture.org"))))

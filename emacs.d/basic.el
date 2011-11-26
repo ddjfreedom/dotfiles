@@ -55,3 +55,5 @@
 
 (column-number-mode t)
 
+;; dired
+(setq dired-listing-switches "-ahl")
