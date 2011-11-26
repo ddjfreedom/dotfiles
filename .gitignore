@@ -2,3 +2,12 @@ emacs.d/ac-comphist.dat
 *~
 emacs.d/tramp
 emacs.d/.session
+emacs.d/.org-id-locations
+.DS_Store
+\#*\#
+
+vim/.netrwhist
+
+emacs.d/url/cookies
+
+emacs.d/bookmarks
