@@ -5,27 +5,26 @@
       '((:name color-theme-solarized
                :type git
                :url "https://github.com/sellout/emacs-color-theme-solarized.git"
-               :after (lambda ()
+               :after (progn
                         (add-to-list 'custom-theme-load-path
                                      (expand-file-name "color-theme-solarized" el-get-dir))
                         (load-theme 'solarized-light t)))
         (:name clojure-mode)
         (:name paredit
-               :after (lambda ()
+               :after (progn
                         (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode +1)))
                         (add-hook 'lisp-mode-hook (lambda () (paredit-mode +1)))
                         (add-hook 'clojure-mode-hook (lambda () (paredit-mode +1)))))
         (:name magit
-               :after (lambda () (global-set-key (kbd "C-x C-a") 'magit-status)))
+               :after (progn (global-set-key (kbd "C-x C-a") 'magit-status)))
         (:name yasnippet
-               :features (yasnippet)
-               :after (lambda ()
+               :after (progn
                         (setq yas/trigger-key "")
                         (yas/initialize)
                         (yas/load-directory (expand-file-name "yasnippet/snippets" el-get-dir))))
         (:name cedet
                :features (cedet)
-               :after (lambda ()
+               :after (progn
                         (semantic-load-enable-excessive-code-helpers)
                         (eval-after-load "gtags"
                           '(progn
@@ -40,25 +39,25 @@
         (:name slime
                :features slime
                :compile ()
-               :after (lambda ()
+               :after (progn
                         (load-file (expand-file-name "slime.el" my-emacs-path))))
         (:name auto-complete
                :features (auto-complete-config))
         (:name emacs-w3m
-               :after (lambda () (if window-system (require 'w3m-load))))
+               :after (progn (if window-system (require 'w3m-load))))
         (:name org-mode
                :features (org)
-               :after (lambda ()
+               :after (progn
                         (eval-after-load "org"
                           (load-file (expand-file-name "org-mode.el" my-emacs-path)))))
         (:name undo-tree
                :features undo-tree
-               :after (lambda ()
+               :after (progn
                         (global-undo-tree-mode)
                         (global-set-key (kbd "s-Z") 'undo-tree-redo)))
         (:name smex
                :features smex
-               :after (lambda ()
+               :after (progn
                         (smex-initialize)
                         (ddj/set-key-bindings 'global-set-key
                                              )))
@@ -66,7 +65,7 @@
                :type http
                :url "http://www.emacswiki.org/emacs/download/lacarte.el"
                :features lacarte
-               :after (lambda ()
+               :after (progn
                         (ddj/set-key-bindings 'global-set-key
                                               `(,(kbd "<escape> M-x") lacarte-execute-command)
                                               `(,(kbd "M-`") lacarte-execute-menu-command)
@@ -78,9 +77,6 @@
                                  " --with-texmf-dir=/usr/local/texlive/texmf-local")
                         "make"))
         (:name ac-math
-               :description "An add-on which defines three ac-sources for the auto-complete package"
-               :type http
-               :url "https://ac-math.googlecode.com/svn/trunk/ac-math.el"
                :features ac-math)
         (:name predictive
                :build `(,(concat "make EMACS=" el-get-emacs)
@@ -90,7 +86,7 @@
         (:name info+
                :type http
                :url "http://www.emacswiki.org/emacs/download/info+.el"
-               :after (lambda () (eval-after-load "info" '(require 'info+))))
+               :after (progn (eval-after-load "info" '(require 'info+))))
         (:name sunrise-commander
                :type git
                :url "https://github.com/escherdragon/sunrise-commander.git"
@@ -100,13 +96,13 @@
                           sunrise-x-modeline
                           sunrise-x-tree
                           sunrise-x-loop)
-               :after (lambda ()
+               :after (progn
                         (setq sr-terminal-program "bash")
                         (setq sr-listing-switches "-alh")))
         (:name ack-and-a-half
                :type git
                :url "https://github.com/jhelwig/ack-and-a-half.git"
-               :after (lambda ()
+               :after (progn
                         (autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
                         (autoload 'ack-and-a-half "ack-and-a-half" nil t)
                         (autoload 'ack-and-a-half-find-file-samee "ack-and-a-half" nil t)
@@ -121,4 +117,3 @@
         (:name sicp
                :info "sicp.info")))
 (el-get 'sync)
-
