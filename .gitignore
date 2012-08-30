@@ -11,3 +11,12 @@ vim/.netrwhist
 emacs.d/url/cookies
 
 emacs.d/bookmarks
+emacs.d/swank
+emacs.d/.smex-items
+emacs.d/places
+emacs-starter/.org-id-locations
+emacs-starter/.smex-items
+emacs-starter/bookmarks
+emacs-starter/el-get-backup-3.stable
+emacs-starter/places
+emacs-starter/swank
