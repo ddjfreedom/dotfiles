@@ -17,11 +17,9 @@ if has('mouse')
   set mouse=a
 endif
 
-if has('gui_running')
-  set background=light
-endif
-colorscheme solarized
-set shell=/bin/bash
+set background=dark
+colorscheme zenburn
+set shell=/usr/local/bin/zsh
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,cp932
 set incsearch
 set number
@@ -41,9 +39,9 @@ set showcmd
 set laststatus=2
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%l,%v]
 set expandtab
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 set visualbell t_vb=
 set ignorecase
 "set wildmode=list:longest,full

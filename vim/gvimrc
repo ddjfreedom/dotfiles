@@ -3,7 +3,6 @@ if has("gui_macvim")
     set guioptions-=T
     set autochdir
     set guifont=Menlo\ Regular:h12
-    colorscheme solarized
     macmenu &File.New\ Tab key=<nop>
     map <D-t> :CommandT<CR>
 endif
